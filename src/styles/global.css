@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html {
+  box-sizing: border-box;
+    }
+*, :after, :before {
+  box-sizing: border-box;
+  }
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #EFEFEF;
+  color: #3c414d;
+  font-family: Francois One, Helvetica, Arial, sans-serif !important;
+  }

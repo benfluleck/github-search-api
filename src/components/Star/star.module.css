@@ -1,0 +1,10 @@
+.starButtonFilled {
+  fill: #f2c94c;
+  pointer-events: none;
+}
+
+.starButtonUnfilled {
+  fill: transparent;
+  stroke: black;
+  pointer-events: none;
+}

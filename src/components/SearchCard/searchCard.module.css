@@ -1,0 +1,22 @@
+.starButtonFilled > svg {
+  fill: #f2c94c;
+  pointer-events: none;
+}
+
+.starButtonUnfilled > svg {
+  fill: transparent;
+  stroke: black;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .searchCard {
+    width: 100%;
+  }
+}
+
+@media (max-width: 270px) {
+  .searchCard {
+    flex-direction: column;
+  }
+}
