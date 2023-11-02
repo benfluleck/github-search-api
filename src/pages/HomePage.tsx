@@ -1,56 +1,54 @@
 import { FC, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import SearchBox from '@components/SearchBox/SearchBox';
 import SearchCardList from '@components/SearchCardList/SearchCardList';
-import { useSearchParams } from 'react-router-dom';
-import {
-  REQUEST_STATUSES,
-  transformAccounts,
-  useAbortableFetch,
-} from '@utils/hooks/useFetchUsers';
+import { transformAccounts, useGHAccounts } from '@utils/hooks/useFetch';
 import Navigation from '@components/Navigation/Navigation';
 import useIntersectionObserver from '@utils/hooks/useIntersectionObserver';
-import { useFetchFavouriteProfiles } from '@utils/hooks/useFetchFavouriteProfiles';
-import { GithubAccount } from '@entities/account';
+import { useLocalStorageState } from '@utils/hooks/useLocalStorage';
+import { debounce } from '@utils/debounce';
 
+const BASE_URL = 'https://api.github.com/search/users';
 
 const HomePage: FC = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(1);
 
-  const [query, setQuery] = useState(searchParams.get('search') ?? '');
-
-  const { favouriteIds, favouriteProfiles } = useFetchFavouriteProfiles();
+  const query = searchParams.get('search') ?? '';
+  const [favouriteProfiles, setFavouriteProfiles] = useLocalStorageState({}, 'work_4_all');
 
   const ref = useRef(null);
   const observerTarget = useIntersectionObserver(ref);
 
-  const URL = query ? `https://api.github.com/search/users?q=${query}&page=${page}` : '';
+  const URL = query.length >= 3 ? `${BASE_URL}?q=${query}&page=${page}` : '';
 
-  const { status, error, accounts, fetchData } = useAbortableFetch<GithubAccount[]>(URL);
+  const { status, accounts, setAccounts } = useGHAccounts(URL);
 
-  const searchedAccounts = transformAccounts(accounts, favouriteIds);
-
-  const fetchCurrentData = async () => {
-    await fetchData(URL);
-    setPage((page) => page + 1);
-  };
-
+  const searchedAccounts = transformAccounts(accounts, favouriteProfiles);
 
   useEffect(() => {
     if (observerTarget?.isIntersecting) {
-      fetchCurrentData();
+      debounce(setPage)(page + 1);
     }
-  }, [observerTarget?.isIntersecting, query]);
+  }, [observerTarget?.isIntersecting]);
 
-  const isLoading = status === REQUEST_STATUSES.LOADING;
+  const isLoading = status === 'loading';
 
   const handleSearchFilter = (value: string) => {
-    if (value.length >= 3) {
-      setSearchParams({ search: value });
-      setQuery(value);
+    setSearchParams({ search: value });
+    setPage(1);
+    setAccounts([]);
+  };
+
+  const handleUserClick = async (account) => {
+    if (favouriteProfiles[account.id]) {
+      delete favouriteProfiles[account.id];
+      setFavouriteProfiles({ ...favouriteProfiles });
     } else {
-      setSearchParams({});
-      setQuery('');
+      setFavouriteProfiles({
+        ...favouriteProfiles,
+        [account.id]: { ...account, isFavourited: true }
+      });
     }
   };
 
@@ -61,16 +59,12 @@ const HomePage: FC = () => {
       </Navigation>
       <main className="p-4">
         {searchedAccounts.length ? (
-          <SearchCardList
-            accounts={searchedAccounts}
-            savedFavouriteProfiles={favouriteProfiles}
-            isLoading={isLoading}
-          />
+          <SearchCardList accounts={searchedAccounts} onClick={handleUserClick} />
         ) : (
           <p className="pt-2 text-center">No search results...</p>
         )}
         {isLoading && <p>Loading...</p>}
-        <div id="benny" ref={ref}></div>
+        <div ref={ref}></div>
       </main>
     </>
   );

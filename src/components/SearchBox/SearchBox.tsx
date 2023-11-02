@@ -21,6 +21,7 @@ const SearchBox: FC<SearchBoxProps> = ({ handleFormChange, searchValue }) => {
   return (
     <input
       type="search"
+      data-testid="search-input"
       aria-label="Search Github users"
       value={searchInput}
       onChange={handleChange}

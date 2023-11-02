@@ -2,23 +2,25 @@ import Star from '@components/Star/Star';
 import { FC, ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-
 interface NavigationProps {
-  children? : ReactNode | undefined;
+  children?: ReactNode | undefined;
 }
 
 const Navigation: FC<NavigationProps> = ({ children }) => {
-  const { pathname } = useLocation()
-  
-  return  (
-  <nav className="bg-white border-solid border-black w-full h-16 shadow-md shadow-gray-200 flex justify-center">
-    <div className="w-5/12">
-    <div className='flex h-full gap-8'>
-      {children}
-      <Link className='flex items-center' to="/favourites"><Star isStared={pathname === '/favourites'}/></Link>
+  const { pathname } = useLocation();
+
+  return (
+    <nav className="bg-white border-solid border-black w-full h-16 shadow-md shadow-gray-200 flex justify-center">
+      <div className="w-5/12 max-[749px]:w-full">
+        <div className="flex h-full gap-8 max-[749px]:px-2">
+          {children}
+          <Link className="flex items-center" to="/favourites">
+            <Star isStared={pathname === '/favourites'} />
+          </Link>
+        </div>
       </div>
-    </div>
-  </nav>
-)};
+    </nav>
+  );
+};
 
 export default Navigation;

@@ -20,6 +20,7 @@
       "@styles/*": ["./src/styles/*"],
       "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./src/assets/*"],
+      "@helpers/*": ["./src/helpers/*"],
       "@entities/*": ["./src/entities/*"],
       "@mocks/*": ["./src/mocks/*"]
     }

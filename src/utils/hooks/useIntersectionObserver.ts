@@ -10,9 +10,9 @@ export default function useIntersectionObserver(
   };
 
   useEffect(() => {
-    const node = elementRef?.current; // DOM Ref
+    const node = elementRef?.current;
 
-    const observer = new IntersectionObserver(updateEntry, { threshold: 1 });
+    const observer = new IntersectionObserver(updateEntry, { threshold: 1, rootMargin: '50px' });
 
     observer.observe(node);
 

@@ -2,15 +2,3 @@
   border-bottom: 1px solid #c8c8c8;
 }
 
-
-@media (max-width: 767px) {
-  .searchCard {
-    width: 100%;
-  }
-}
-
-@media (max-width: 270px) {
-  .searchCard {
-    flex-direction: column;
-  }
-}

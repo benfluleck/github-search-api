@@ -1,7 +1,7 @@
 export interface Account {
   id: string;
   githubId: string;
-  description?: string;
+  bio?: string;
   avatarUrl?: string;
   isFavourited: boolean;
 }
