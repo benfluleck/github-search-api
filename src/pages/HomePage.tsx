@@ -63,7 +63,7 @@ const HomePage: FC = () => {
         ) : (
           <p className="pt-2 text-center">No search results...</p>
         )}
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <p className='pt-2 text-center'>Loading...</p>}
         <div ref={ref}></div>
       </main>
     </>

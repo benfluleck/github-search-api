@@ -10,11 +10,11 @@ const Navigation: FC<NavigationProps> = ({ children }) => {
   const { pathname } = useLocation();
 
   return (
-    <nav className="bg-white border-solid border-black w-full h-16 shadow-md shadow-gray-200 flex justify-center">
+    <nav data-testid="nav-component"  className="bg-white border-solid border-black w-full h-16 shadow-md shadow-gray-200 flex justify-center">
       <div className="w-5/12 max-[749px]:w-full">
         <div className="flex h-full gap-8 max-[749px]:px-2">
           {children}
-          <Link className="flex items-center" to="/favourites">
+          <Link aria-label='favourite' className="flex items-center" to="/favourites">
             <Star isStared={pathname === '/favourites'} />
           </Link>
         </div>
