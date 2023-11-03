@@ -29,12 +29,12 @@ describe('SearchBox component', () => {
       }
     });
 
-    expect(mockOnChange).toHaveBeenCalledTimes(2)
+    expect(mockOnChange).toHaveBeenCalledTimes(2);
     expect(searchInput).toHaveAttribute('value', 'This is a test!');
   });
 
   it('renders inital value in the SearchBox component', () => {
-    render(<SearchBox {...defaultProps} searchValue='Test' />, '');
+    render(<SearchBox {...defaultProps} searchValue="Test" />, '');
 
     const searchInput = screen.getByTestId('search-input');
 

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styles from './searchCard.module.css';
 import Star from '@components/Star/Star';
 import { Account } from '@entities/account';

@@ -4,7 +4,7 @@ import DetailCard from '../DetailCard';
 
 const defaultProps = {
   id: '333',
-  fullName:'Test Name',
+  fullName: 'Test Name',
   avatarUrl: 'https://test-url',
   githubId: 'testId',
   bio: 'This is a test Bio',
@@ -13,7 +13,7 @@ const defaultProps = {
   repoCount: 30,
   htmlLink: 'https://github.ben',
   isFavourited: false,
-  onClick: () => {},
+  onClick: () => {}
 };
 
 describe('DetailCard component', () => {
@@ -26,7 +26,7 @@ describe('DetailCard component', () => {
   it('renders DetailCard attributes', () => {
     render(<DetailCard {...defaultProps} />, '');
 
-    expect(screen.getByText('@testId')).toBeInTheDocument
+    expect(screen.getByText('@testId')).toBeInTheDocument;
     expect(screen.getByText('Test Name')).toBeInTheDocument;
     expect(screen.getByText('55')).toBeInTheDocument;
     expect(screen.getByText('60')).toBeInTheDocument;
@@ -37,15 +37,14 @@ describe('DetailCard component', () => {
   });
 
   it('should fire Event when button is clicked on Detail Card', () => {
-    const mockOnClick = jest.fn()
+    const mockOnClick = jest.fn();
 
     render(<DetailCard {...defaultProps} onClick={mockOnClick} />, '');
 
-    const button = screen.getByRole('button')
+    const button = screen.getByRole('button');
 
-    fireEvent.click(button)
+    fireEvent.click(button);
 
-    expect(mockOnClick).toHaveBeenCalledTimes(1)
-
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 });

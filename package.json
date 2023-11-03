@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "webpack serve --mode development",
+    "start:dev": "webpack serve --open --mode development",
     "lint": "eslint .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint:fix": "eslint --fix",
+    "lint-and-fix": "eslint . --ext .tsx --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "keywords": [],
@@ -36,6 +36,7 @@
     "autoprefixer": "^10.4.16",
     "css-loader": "^6.8.1",
     "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.33.2",
     "file-loader": "^6.2.0",

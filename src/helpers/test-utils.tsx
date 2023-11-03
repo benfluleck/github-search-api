@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { MemoryRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 

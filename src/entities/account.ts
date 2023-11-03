@@ -6,9 +6,8 @@ export interface Account {
   isFavourited: boolean;
 }
 
-
 export interface GithubAccount {
-  avatar_url: string,
-  login: string,
-  id: string
+  avatar_url: string;
+  login: string;
+  id: string;
 }

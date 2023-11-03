@@ -24,9 +24,10 @@ export const useFetch = <T = unknown>(url: string, config: RequestInit = {}) => 
         throw new Error(await response.text());
       }
       const jsonData = await response.json();
-      setStatus('success');
+
       setData(jsonData);
-      
+      setStatus('success');
+
       setError(null);
     } catch (error) {
       if (!config?.signal?.aborted) {
@@ -44,6 +45,7 @@ export const useFetch = <T = unknown>(url: string, config: RequestInit = {}) => 
   return {
     data,
     error,
+    setData,
     status,
     isLoading: status === 'loading',
     isError: status === 'error'
@@ -51,18 +53,24 @@ export const useFetch = <T = unknown>(url: string, config: RequestInit = {}) => 
 };
 
 export const useGHAccounts = (url: string) => {
-  const { data, error, status, isLoading, isError} = useFetch<{items: GithubAccount[]}>(url)
+  const { data, error, status, isLoading, isError, setData } = useFetch<{ items: GithubAccount[] }>(
+    url
+  );
 
-  const [accounts, setAccounts] = useState<GithubAccount[]>([])
+  const [accounts, setAccounts] = useState<GithubAccount[]>([]);
+
+  const reset = () => {
+    setData(null);
+    setAccounts([]);
+  };
 
   useEffect(() => {
-    const items = data ? data.items : []
-    setAccounts(accounts => ([...accounts, ...items]))
-  }, [url, data])
+    const items = data ? data.items : [];
+    setAccounts((accounts) => [...accounts, ...items]);
+  }, [url, data?.items?.length]);
 
-  return { accounts, setAccounts, error, status, isLoading, isError }
-}
-
+  return { accounts, setAccounts, error, status, isLoading, isError, reset };
+};
 
 export const transformAccounts = (accounts: GithubAccount[], favouriteProfiles): Account[] => {
   return accounts.map((account) => {

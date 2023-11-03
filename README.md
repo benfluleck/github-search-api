@@ -12,15 +12,17 @@
 - [Status](#status)
 
 ## Getting Started
-This is a clientside javascript application built [React JS](https://reactjs.org/) application. The data exists on endpoints serve through the Github Search Api  [api](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28)
+This is a clientside javascript application built [React JS](https://reactjs.org/) application. The data exists on endpoints serve through the [Github Search Api](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28). 
 
-<img width="1440" alt="Client Side" src="./screenshot/images.png">
+It provides the capabilities of searching through and favouriting some of the users
+
+<img width="800" alt="Client Side" src="./screenshot/images.png">
 
 ## Technology Stack
 
 **Client Side**
-2. React JS
-3. TypeScript
+1. React JS
+2. TypeScript
 
 
 ## Installation
@@ -49,10 +51,8 @@ Webpack should open your default browser automatically
 
 Client side tests - Run `pnpm run test` on the terminal while within the **project root directory**.
 
-Client side testing is achieved through the use of `jest` package. `jest` is used to test javascript code in
-React applications.
+Client side testing is achieved through the use of `jest` package and `React testing library`. `jest` is used to test javascript code in ReactReact applications. The React Testing Library is a very light-weight solution for testing React components
 
-Client side testing is yet to be configured but is being worked on currently
 
 ## Questions
 For more details contact @benfluleck

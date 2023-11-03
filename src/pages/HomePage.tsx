@@ -11,7 +11,7 @@ import { debounce } from '@utils/debounce';
 const BASE_URL = 'https://api.github.com/search/users';
 
 const HomePage: FC = () => {
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(1);
 
   const query = searchParams.get('search') ?? '';
@@ -22,12 +22,12 @@ const HomePage: FC = () => {
 
   const URL = query.length >= 3 ? `${BASE_URL}?q=${query}&page=${page}` : '';
 
-  const { status, accounts, setAccounts } = useGHAccounts(URL);
+  const { status, accounts, reset } = useGHAccounts(URL);
 
   const searchedAccounts = transformAccounts(accounts, favouriteProfiles);
 
   useEffect(() => {
-    if (observerTarget?.isIntersecting) {
+    if (observerTarget?.isIntersecting && accounts?.length >= 30) {
       debounce(setPage)(page + 1);
     }
   }, [observerTarget?.isIntersecting]);
@@ -35,9 +35,11 @@ const HomePage: FC = () => {
   const isLoading = status === 'loading';
 
   const handleSearchFilter = (value: string) => {
-    setSearchParams({ search: value });
-    setPage(1);
-    setAccounts([]);
+    debounce(() => {
+      reset();
+      setSearchParams({ search: value });
+      setPage(1);
+    }, 3000)();
   };
 
   const handleUserClick = async (account) => {
@@ -57,15 +59,17 @@ const HomePage: FC = () => {
       <Navigation>
         <SearchBox searchValue={query} handleFormChange={handleSearchFilter} />
       </Navigation>
-      <main className="p-4">
+      <main className="p-4 h-screen">
         {searchedAccounts.length ? (
-          <SearchCardList accounts={searchedAccounts} onClick={handleUserClick} />
+          <div className="grow p-4">
+            <SearchCardList accounts={searchedAccounts} onClick={handleUserClick} />
+          </div>
         ) : (
           <p className="pt-2 text-center">No search results...</p>
         )}
-        {isLoading && <p className='pt-2 text-center'>Loading...</p>}
-        <div ref={ref}></div>
       </main>
+      {isLoading && <p className="pt-2 text-center">Loading...</p>}
+      <div ref={ref} />
     </>
   );
 };

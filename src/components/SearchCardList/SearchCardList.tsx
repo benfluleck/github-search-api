@@ -1,8 +1,7 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import SearchCard from '@components/SearchCard/SearchCard';
 import styles from './searchCardList.module.css';
 import { Account } from '@entities/account';
-
 
 interface SearchCardListDrops {
   accounts?: Account[];
@@ -11,7 +10,10 @@ interface SearchCardListDrops {
 
 const SearchCardList: FC<SearchCardListDrops> = ({ accounts, onClick }) => {
   return (
-    <div data-testid="searchCardList-component" className={`${styles.searchCardList} flex justify-center items-center flex-col`}>
+    <div
+      data-testid="searchCardList-component"
+      className={`${styles.searchCardList} flex justify-center items-center flex-col`}
+    >
       {accounts.map((account) => (
         <SearchCard
           key={account.id}

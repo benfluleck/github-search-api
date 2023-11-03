@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '@styles/global.css';
-import { Suspense, lazy } from 'react';
-
-const HomePage = lazy(() => import('@pages/HomePage'));
-const FavouritePage = lazy(() => import('@pages/FavouritePage'));
-const DetailPage = lazy(() => import('@pages/DetailPage'));
+import { Suspense } from 'react';
+import HomePage from '@pages/HomePage';
+import DetailPage from '@pages/DetailPage';
+import FavouritePage from '@pages/FavouritePage';
 
 const App = () => (
   <Suspense fallback={<p>Loading...</p>}>

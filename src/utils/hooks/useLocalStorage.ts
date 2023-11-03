@@ -1,6 +1,5 @@
 import { useEffect, useState, Dispatch, SetStateAction } from 'react';
 
-
 export function useLocalStorageState<T>(
   defaultValue: T,
   key?: string

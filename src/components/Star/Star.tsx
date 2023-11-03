@@ -6,7 +6,7 @@ interface StarProps {
   isStared?: boolean;
 }
 
-const Star:FC<StarProps> = ({ size = 16, isStared = false }) => (
+const Star: FC<StarProps> = ({ size = 16, isStared = false }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 const prod = process.env.NODE_ENV === 'production';
 
 const path = require('path');
@@ -28,9 +30,9 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader',
-          },
-        ],
+            loader: 'file-loader'
+          }
+        ]
       },
       {
         test: /\.(ts|tsx)/,
@@ -44,8 +46,8 @@ module.exports = {
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
-        use: ['@svgr/webpack'],
-      },
+        use: ['@svgr/webpack']
+      }
     ]
   },
   devtool: prod ? undefined : 'source-map',
@@ -58,10 +60,10 @@ module.exports = {
   devServer: {
     static: {
       directory: path.join(__dirname, 'build'),
-      publicPath: '/',
+      publicPath: '/'
     },
     port: 3000,
-    
-    historyApiFallback: true,
+
+    historyApiFallback: true
   }
 };

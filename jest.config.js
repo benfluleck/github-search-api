@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
@@ -8,17 +9,17 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
-  "moduleNameMapper": {
-    "@components/(.*)$": "<rootDir>/src/components/$1",
-    "@utils/(.*)$": "<rootDir>/src/utils/$1",
-    "@pages/(.*)$": "<rootDir>/src/pages/$1",
-    "@helpers/(.*)$": "<rootDir>/src/helpers/$1",
-    "\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js"
+  moduleNameMapper: {
+    '@components/(.*)$': '<rootDir>/src/components/$1',
+    '@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '@pages/(.*)$': '<rootDir>/src/pages/$1',
+    '@helpers/(.*)$': '<rootDir>/src/helpers/$1',
+    '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.js'
   },
   testEnvironment: 'jsdom',
   testMatch: ['**/?(*.)(spec).tsx'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
-  setupFilesAfterEnv: ["@testing-library/jest-dom"],
+  setupFilesAfterEnv: ['@testing-library/jest-dom'],
 
   // Module file extensions for importing
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']

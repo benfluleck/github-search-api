@@ -7,7 +7,7 @@ const defaultProps = {
   avatarUrl: 'https://test-url',
   githubId: 'testId',
   isFavourited: false,
-  onClick: () => {},
+  onClick: () => {}
 };
 
 describe('SearchCard component', () => {
@@ -26,15 +26,14 @@ describe('SearchCard component', () => {
   });
 
   it('should fire Event when button is clicked', () => {
-    const mockOnClick = jest.fn()
+    const mockOnClick = jest.fn();
 
     render(<SearchCard {...defaultProps} onClick={mockOnClick} />, '');
 
-    const button = screen.getByRole('button')
+    const button = screen.getByRole('button');
 
-    fireEvent.click(button)
+    fireEvent.click(button);
 
-    expect(mockOnClick).toHaveBeenCalledTimes(1)
-
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 });

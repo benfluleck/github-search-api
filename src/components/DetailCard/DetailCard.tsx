@@ -15,7 +15,10 @@ const DetailCard: FC<DetailProps> = ({
   id,
   onClick
 }) => (
-  <div data-testid="detailCard-component" className="flex h-64 gap-6 bg-white border-solid rounded shadow border-slate-600 p-8 max-[520px]:flex-col max-[520px]:h-full">
+  <div
+    data-testid="detailCard-component"
+    className="flex h-64 gap-6 bg-white border-solid rounded shadow border-slate-600 p-8 max-[520px]:flex-col max-[520px]:h-full"
+  >
     <img src={avatarUrl} alt={`${githubId} avatar`} aria-hidden="true" className="w-48 h-48" />
     <div>
       <div className="flex justify-between mb-3">
